@@ -5,6 +5,8 @@ import { StyleSheet, View } from 'react-native';
 import {Icon, Text, Button} from 'react-native-elements';
 
 import {header as Header } from '../components/header';
+import FullButton from '../components/fullButton';
+
 import {colors} from '../styles';
 
 const HomeScreen = () => {
@@ -23,13 +25,9 @@ const HomeScreen = () => {
 
       <View style={{flex: 1}}></View>
 
-      <Button 
-        title="Pick This Location"
-        icon={{name: 'location-arrow', type: 'font-awesome'}}
-        textStyle={{fontFamily: 'karla-bold'}}
-        containerViewStyle={{width: '100%'}}
-        buttonStyle={{height: 48, width: '100%'}}
-        backgroundColor={colors.btnPrimColor}
+      <FullButton 
+        icon='location-arrow'
+        title='Pick this Location'
       />
     </View>
   );
@@ -38,7 +36,6 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     marginTop: Expo.Constants.statusBarHeight,
     alignItems: 'center',
   },
