@@ -1,5 +1,5 @@
 import React from 'react';
-import Expo, {MapView} from 'expo';
+import Expo, {MapView, Permissions, Location} from 'expo';
 import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
 
 import {Icon, Text, Button, SearchBar} from 'react-native-elements';
@@ -9,55 +9,95 @@ import FullButton from '../components/fullButton';
 
 import {colors} from '../styles';
 
-const HomeScreen = () => {
-  return (
-    <KeyboardAvoidingView behavior="padding" style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={{
+class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      location: {
         latitude: 37.78825,
         longitude: -122.4324,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
-      }}/>
-      <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
+      },
+      locPermission: null
+    };
 
-      <View style={{
-        flex: 1
-      }}></View>
+    this.render = this
+      .render
+      .bind(this);
+  }
 
-      <View style={{
-        width: '90%',
-        marginBottom: 80
-      }}>
-        <SearchBar
-          lightTheme
-          placeholder="Where to Traveller ?"
-          containerStyle={{
-          borderRadius: 4,
-          backgroundColor: colors.bgColor,
-          height: 56,
-          paddingLeft: 8,
-          elevation: 1
-        }}
-          inputStyle={{
-          backgroundColor: colors.bgColor,
-          color: colors.txtColor,
-          fontFamily: 'karla',
-          fontSize: 16
-        }}
-          icon={{
-          name: 'swap-vertical-circle',
-          color: colors.txtColor,
-          style: {
-            fontSize: 18
-          }
-        }}/>
-      </View>
+  async componentWillMount() {
+    let {status} = await Permissions.askAsync(Permissions.LOCATION);
 
-      {/*<FullButton icon='location-arrow' title='Pick Me Up Scotty'/>*/}
-    </KeyboardAvoidingView>
-  );
+    if (status == 'granted') {
+      let location = await Location.getCurrentPositionAsync({});
+
+      let region = this.regionFrom(location.coords.latitude, location.coords.longitude, 800);
+      this.setState({location: region, locPermission: true});
+    }
+  }
+
+  regionFrom(lat, lon, distance) {
+    distance = distance / 2
+    const circumference = 40075
+    const oneDegreeOfLatitudeInMeters = 111.32 * 1000
+    const angularDistance = distance / circumference
+
+    const latitudeDelta = distance / oneDegreeOfLatitudeInMeters
+    const longitudeDelta = Math.abs(Math.atan2(Math.sin(angularDistance) * Math.cos(lat), Math.cos(angularDistance) - Math.sin(lat) * Math.sin(lat)))
+
+    return result = {
+      latitude: lat,
+      longitude: lon,
+      latitudeDelta,
+      longitudeDelta
+    }
+  }
+
+  render() {
+    return (
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <MapView style={styles.map} region={this.state.location}/>
+        <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
+
+        <View style={{
+          flex: 1
+        }}></View>
+
+        <View style={{
+          width: '90%',
+          marginBottom: 80
+        }}>
+          <SearchBar
+            lightTheme
+            placeholder="Where to Traveller ?"
+            containerStyle={{
+            borderRadius: 4,
+            backgroundColor: colors.bgColor,
+            height: 56,
+            paddingLeft: 8,
+            elevation: 1
+          }}
+            inputStyle={{
+            backgroundColor: colors.bgColor,
+            color: colors.txtColor,
+            fontFamily: 'karla',
+            fontSize: 16
+          }}
+            icon={{
+            name: 'swap-vertical-circle',
+            color: colors.txtColor,
+            style: {
+              fontSize: 18
+            }
+          }}/>
+        </View>
+
+      </KeyboardAvoidingView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
