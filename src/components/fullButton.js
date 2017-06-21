@@ -9,7 +9,7 @@ export default FullButton = ({title, icon, iconType}) => {
       icon={{name: icon, type: iconType || 'font-awesome'}} 
       textStyle={{fontFamily: 'karla-bold'}}
       containerViewStyle={{width: '100%'}}
-      buttonStyle={{height: 48, width: '100%'}}
+      buttonStyle={{height: 56, width: '100%'}}
       backgroundColor={colors.btnPrimColor}
     />
   );
