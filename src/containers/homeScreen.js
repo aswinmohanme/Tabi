@@ -1,6 +1,6 @@
 import React from 'react';
 import Expo, {MapView} from 'expo';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
 
 import {Icon, Text, Button, SearchBar} from 'react-native-elements';
 
@@ -11,7 +11,7 @@ import {colors} from '../styles';
 
 const HomeScreen = () => {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <MapView
         style={styles.map}
         initialRegion={{
@@ -22,11 +22,13 @@ const HomeScreen = () => {
       }}/>
       <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
 
-      <View
-        style={{
-        flex: 1,
-        marginTop: 80,
-        width: '90%'
+      <View style={{
+        flex: 1
+      }}></View>
+
+      <View style={{
+        width: '90%',
+        marginBottom: 80
       }}>
         <SearchBar
           lightTheme
@@ -53,8 +55,8 @@ const HomeScreen = () => {
         }}/>
       </View>
 
-      <FullButton icon='location-arrow' title='Pick Me Up Scotty'/>
-    </View>
+      {/*<FullButton icon='location-arrow' title='Pick Me Up Scotty'/>*/}
+    </KeyboardAvoidingView>
   );
 }
 
