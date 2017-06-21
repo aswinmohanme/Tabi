@@ -2,7 +2,9 @@ import React from 'react';
 import Expo, { MapView } from 'expo';
 import { StyleSheet, View } from 'react-native';
 
-import {Header, Icon, Text, Button} from 'react-native-elements';
+import {Icon, Text, Button} from 'react-native-elements';
+
+import {header as Header } from '../components/header';
 import {colors} from '../styles';
 
 const HomeScreen = () => {
@@ -17,13 +19,10 @@ const HomeScreen = () => {
           longitudeDelta: 0.0421,
         }}
       />
-      <Header
-        leftComponent={<Icon name='menu'/>}
-        centerComponent={<Text style={{fontFamily: 'karla', fontSize: 18}}>Tabi</Text>}
-        outerContainerStyles={{height: 64, alignSelf: 'flex-end'}}
-        backgroundColor={colors.bgColor}
-      />
+      <Header title={'Tabi'}/>
+
       <View style={{flex: 1}}></View>
+
       <Button 
         title="Pick This Location"
         icon={{name: 'location-arrow', type: 'font-awesome'}}
