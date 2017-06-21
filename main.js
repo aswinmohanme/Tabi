@@ -1,24 +1,36 @@
 import Expo from 'expo';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {Component} from 'react';
 
-class App extends React.Component {
+import App from './src/app';
+
+class Tabi extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fontsLoaded: false,
+    };
+
+    this.render = this.render.bind(this);
+  }
+
+  async componentWillMount(){
+    await Expo.Font.loadAsync({
+      'karla-bold': require('./assets/fonts/Karla-Bold.ttf'),
+      'karla': require('./assets/fonts/Karla-Regular.ttf')
+    });
+    this.setState({fontsLoaded: true});
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up main.js to start working on your app!</Text>
-      </View>
-    );
+    if(this.state.fontsLoaded)
+      return (
+        <App />
+      );
+    else
+      return(
+        <Expo.AppLoading />
+      );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-Expo.registerRootComponent(App);
+Expo.registerRootComponent(Tabi);
