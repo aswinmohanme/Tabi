@@ -21,7 +21,7 @@ const HomeScreen = () => {
           longitudeDelta: 0.0421,
         }}
       />
-      <Header title={'Tabi'}/>
+      <Header icon='menu' iconType='entypo' title={'Book a Ride'}/>
 
       <View style={{flex: 1}}></View>
 
