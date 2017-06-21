@@ -9,264 +9,18 @@ import FullButton from '../components/fullButton';
 
 import {colors} from '../styles';
 
-mapStyle = [
-  {
-    "featureType": "administrative",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#b4975a"
-      }
-    ]
-  }, {
-    "featureType": "administrative",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#b4975a"
-      }
-    ]
-  }, {
-    "featureType": "landscape.natural",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#353535"
-      }
-    ]
-  }, {
-    "featureType": "water",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#2b2b2b"
-      }
-    ]
-  }, {
-    "featureType": "administrative",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  }, {
-    "featureType": "poi",
-    "elementType": "all",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  }, {
-    "featureType": "landscape.man_made",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "visibility": "on"
-      }, {
-        "color": "#353535"
-      }
-    ]
-  }, {
-    "featureType": "road.arterial",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "visibility": "on"
-      }, {
-        "color": "#2e2e2e"
-      }
-    ]
-  }, {
-    "featureType": "road.local",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#272727"
-      }
-    ]
-  }, {
-    "featureType": "road",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  }, {
-    "featureType": "transit",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#656565"
-      }
-    ]
-  }, {
-    "featureType": "transit",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "visibility": "simplified"
-      }
-    ]
-  }, {
-    "featureType": "transit.station",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  }, {
-    "featureType": "transit.line",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#2e2e2e"
-      }
-    ]
-  }, {
-    "featureType": "road.highway",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#2e2e2e"
-      }
-    ]
-  }, {
-    "featureType": "road.highway",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "visibility": "simplified"
-      }, {
-        "color": "#000000"
-      }
-    ]
-  }, {
-    "featureType": "road",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#656565"
-      }
-    ]
-  }, {
-    "featureType": "landscape.man_made",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  }, {
-    "featureType": "road",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "visibility": "simplified"
-      }
-    ]
-  }, {
-    "featureType": "transit.station",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  }, {
-    "featureType": "water",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#656565"
-      }
-    ]
-  }, {
-    "featureType": "all",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "visibility": "simplified"
-      }
-    ]
-  }, {
-    "featureType": "transit.line",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "visibility": "on"
-      }, {
-        "color": "#272727"
-      }
-    ]
-  }, {
-    "featureType": "road",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  }, {
-    "featureType": "transit.station",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "visibility": "simplified"
-      }
-    ]
-  }, {
-    "featureType": "transit.station",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "visibility": "simplified"
-      }
-    ]
-  }, {
-    "featureType": "administrative",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "visibility": "off"
-      }, {
-        "color": "#656565"
-      }
-    ]
-  }, {
-    "featureType": "landscape.natural",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#656565"
-      }
-    ]
-  }, {
-    "featureType": "landscape.natural",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  }
-];
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        customMapStyle={mapStyle}
         initialRegion={{
         latitude: 37.78825,
         longitude: -122.4324,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
       }}/>
-      <Header icon='menu' iconType='entypo' title={'Book Ride'}/>
+      <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
 
       <View
         style={{
@@ -292,16 +46,9 @@ const HomeScreen = () => {
         }}
           icon={{
           name: 'swap-vertical-circle',
-          color: colors.btnPrimColor,
+          color: colors.txtColor,
           style: {
             fontSize: 18
-          }
-        }}
-          clearIcon={{
-          name: 'clear-all',
-          style: {
-            fontSize: 18,
-            color: colors.txtColor
           }
         }}/>
       </View>
