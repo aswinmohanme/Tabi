@@ -18,6 +18,10 @@ class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      coords: []
+    };
+
     this.render = this
       .render
       .bind(this);
@@ -35,15 +39,15 @@ class HomeScreen extends React.Component {
         lat: coords.latitude,
         lon: coords.longitude,
       }
-      // } else {   alert("Enable Location if You are going Somewhere") }
     }
   }
-
 
   render() {
     return (
       <View style={styles.container}>
-        <MapView style={styles.map} region={this.props.locationStore.destRegion}/>
+        <MapView style={styles.map} intialRegion={this.props.locationStore.curRegion} region={this.props.locationStore.destRegion}>
+          {/*<MapView.Polyline coordinates={this.props.locationStore.wayPoints}/>*/}
+          </MapView>
 
         <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
 

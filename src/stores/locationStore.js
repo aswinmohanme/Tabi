@@ -1,6 +1,8 @@
-
-import { observable, computed } from 'mobx';
+import {observable, computed} from 'mobx';
 import Expo, {Permissions} from 'expo';
+import Polyline from '@mapbox/polyline';
+
+import {DIRECTION_API} from '../config';
 
 export default class LocationStore {
   @observable curLocation = {}
@@ -28,6 +30,25 @@ export default class LocationStore {
 
   @computed get destRegion() {
     return this.regionFrom(this.destination.lat, this.destination.lon, 600)
+  }
+
+  @computed get wayPoints() {
+    return (async () => {
+      startLoc = `${this.curLocation.lat},${this.curLocation.lon}`
+      destinationLoc = `${this.destination.lat},${this.destination.lon}`
+      try {
+        let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc}&destination=${destinationLoc}&key=${DIRECTION_API}`)
+        let respJson = await resp.json();
+        let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
+        let coords = points.map((point, index) => {
+          return {latitude: point[0], longitude: point[1]}
+        })
+        alert(JSON.stringify(coord));
+        return coords;
+      } catch (error) {
+        alert(error);
+      }
+    })();
   }
 
   regionFrom(lat, lon, distance) {
