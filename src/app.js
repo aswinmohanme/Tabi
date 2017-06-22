@@ -1,13 +1,16 @@
 import Expo, { MapView } from 'expo';
 import React from 'react';
 
+import { StackNavigator } from 'react-navigation';
+
 import HomeScreen from './containers/homeScreen';
-class App extends React.Component {
-  render() {
-      return (
-        <HomeScreen />
-      );
+
+const App = StackNavigator({
+  HomeScreen: {screen: HomeScreen},
+},{
+  navigationOptions: {
+    header: null,
   }
-}
+});
 
 export default App;

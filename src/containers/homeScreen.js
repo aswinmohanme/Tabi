@@ -1,11 +1,11 @@
 import React from 'react';
 import Expo, {MapView, Permissions, Location} from 'expo';
 import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
-
-import {Icon, Text, Button, SearchBar} from 'react-native-elements';
+import {Icon, Text, Button} from 'react-native-elements';
 
 import {header as Header} from '../components/header';
 import FullButton from '../components/fullButton';
+import Search from '../components/searchBar';
 
 import {colors} from '../styles';
 
@@ -20,7 +20,8 @@ class HomeScreen extends React.Component {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
       },
-      locPermission: null
+      locPermission: null,
+      gpsEnabled: null
     };
 
     this.render = this
@@ -32,10 +33,13 @@ class HomeScreen extends React.Component {
     let {status} = await Permissions.askAsync(Permissions.LOCATION);
 
     if (status == 'granted') {
+      // let { locationServicesEnabled } = await
+      // Expo.Location.getProviderStatusAsync(); if (locationServicesEnabled){
       let location = await Location.getCurrentPositionAsync({});
 
       let region = this.regionFrom(location.coords.latitude, location.coords.longitude, 800);
       this.setState({location: region, locPermission: true});
+      // } else {   alert("Enable Location if You are going Somewhere") }
     }
   }
 
@@ -69,31 +73,7 @@ class HomeScreen extends React.Component {
         <View style={{
           width: '90%',
           marginBottom: 80
-        }}>
-          <SearchBar
-            lightTheme
-            placeholder="Where to Traveller ?"
-            containerStyle={{
-            borderRadius: 4,
-            backgroundColor: colors.bgColor,
-            height: 56,
-            paddingLeft: 8,
-            elevation: 1
-          }}
-            inputStyle={{
-            backgroundColor: colors.bgColor,
-            color: colors.txtColor,
-            fontFamily: 'karla',
-            fontSize: 16
-          }}
-            icon={{
-            name: 'swap-vertical-circle',
-            color: colors.txtColor,
-            style: {
-              fontSize: 18
-            }
-          }}/>
-        </View>
+        }}></View>
 
       </KeyboardAvoidingView>
     );
