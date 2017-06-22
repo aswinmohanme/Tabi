@@ -5,7 +5,7 @@ import {Icon} from 'react-native-elements';
 
 import {colors} from '../styles';
 
-export default PlacesSearch = ({}) => {
+export default PlacesSearch = ({onFetch}) => {
   return(
       <GooglePlacesAutocomplete
         placeholder='Where to Senor ?'
@@ -16,7 +16,8 @@ export default PlacesSearch = ({}) => {
         fetchDetails={true}
         renderDescription={(row) => row.description} 
         onPress={(data, details = null) => { 
-          alert(JSON.stringify(details.geometry));
+          let { geometry } = details;
+          onFetch({lat: geometry.location.lat, lon: geometry.location.lng});
         }}
         getDefaultValue={() => {
           return '';
