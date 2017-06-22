@@ -1,11 +1,11 @@
 import React from 'react';
 import Expo, {MapView, Permissions, Location} from 'expo';
-import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
+import {StyleSheet, View, KeyboardAvoidingView, Dimensions} from 'react-native';
 import {Icon, Text, Button} from 'react-native-elements';
 
 import {header as Header} from '../components/header';
 import FullButton from '../components/fullButton';
-import Search from '../components/searchBar';
+import PlacesSearch from '../components/placesSearch';
 
 import {colors} from '../styles';
 
@@ -66,14 +66,13 @@ class HomeScreen extends React.Component {
         <MapView style={styles.map} region={this.state.location}/>
         <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
 
-        <View style={{
-          flex: 1
-        }}></View>
 
         <View style={{
           width: '90%',
-          marginBottom: 80
-        }}></View>
+          marginTop: 100
+        }}>
+          <PlacesSearch />
+        </View>
 
       </KeyboardAvoidingView>
     );
@@ -85,7 +84,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: Expo.Constants.statusBarHeight,
     alignItems: 'center',
-    justifyContent: 'space-around'
   },
   map: {
     position: 'absolute',
