@@ -14,15 +14,9 @@ import {colors} from '../styles';
 @inject('locationStore')
 @observer
 class HomeScreen extends React.Component {
-  @observable curLocation = {};
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      locPermission: null,
-      gpsEnabled: null
-    };
 
     this.render = this
       .render
@@ -35,35 +29,21 @@ class HomeScreen extends React.Component {
     if (status == 'granted') {
       // let { locationServicesEnabled } = await
       // Expo.Location.getProviderStatusAsync(); if (locationServicesEnabled){
-      let location = await Location.getCurrentPositionAsync({});
+      let {coords} = await Location.getCurrentPositionAsync({});
 
-      let region = this.regionFrom(location.coords.latitude, location.coords.longitude, 800);
-      this.props.locationStore.curLocation = region;
+      this.props.locationStore.curLocation = {
+        lat: coords.latitude,
+        lon: coords.longitude,
+      }
       // } else {   alert("Enable Location if You are going Somewhere") }
     }
   }
 
-  regionFrom(lat, lon, distance) {
-    distance = distance / 2
-    const circumference = 40075
-    const oneDegreeOfLatitudeInMeters = 111.32 * 1000
-    const angularDistance = distance / circumference
-
-    const latitudeDelta = distance / oneDegreeOfLatitudeInMeters
-    const longitudeDelta = Math.abs(Math.atan2(Math.sin(angularDistance) * Math.cos(lat), Math.cos(angularDistance) - Math.sin(lat) * Math.sin(lat)))
-
-    return result = {
-      latitude: lat,
-      longitude: lon,
-      latitudeDelta,
-      longitudeDelta
-    }
-  }
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <MapView style={styles.map} region={this.props.locationStore.curLocation}/>
+      <View style={styles.container}>
+        <MapView style={styles.map} region={this.props.locationStore.destRegion}/>
 
         <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
 
@@ -71,10 +51,12 @@ class HomeScreen extends React.Component {
           width: '90%',
           marginTop: 100
         }}>
-          <PlacesSearch />
+          <PlacesSearch onFetch={(data) => {this.props.locationStore.destination = data}}/>
         </View>
 
-      </KeyboardAvoidingView>
+        <View style={{flex: 1}}></View>
+        <FullButton title="Beam Me Up Scotty" icon="paper-plane" />
+      </View>
     );
   }
 }
