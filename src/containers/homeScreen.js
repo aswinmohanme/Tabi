@@ -19,7 +19,8 @@ class HomeScreen extends React.Component {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
       },
-      locPermission: null
+      locPermission: null,
+      gpsEnabled: null,
     };
 
     this.render = this
@@ -31,10 +32,17 @@ class HomeScreen extends React.Component {
     let {status} = await Permissions.askAsync(Permissions.LOCATION);
 
     if (status == 'granted') {
-      let location = await Location.getCurrentPositionAsync({});
+      // let { locationServicesEnabled } = await Expo.Location.getProviderStatusAsync();
 
-      let region = this.regionFrom(location.coords.latitude, location.coords.longitude, 800);
-      this.setState({location: region, locPermission: true});
+      // if (locationServicesEnabled){
+        let location = await Location.getCurrentPositionAsync({});
+
+        let region = this.regionFrom(location.coords.latitude, location.coords.longitude, 800);
+        this.setState({location: region, locPermission: true});
+      // }
+      // else {
+      //   alert("Enable Location if You are going Somewhere")
+      // }
     }
   }
 
