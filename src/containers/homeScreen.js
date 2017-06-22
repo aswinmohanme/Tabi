@@ -1,7 +1,6 @@
 import React from 'react';
 import Expo, {MapView, Permissions, Location} from 'expo';
 import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
-
 import {Icon, Text, Button, SearchBar} from 'react-native-elements';
 
 import {header as Header} from '../components/header';
