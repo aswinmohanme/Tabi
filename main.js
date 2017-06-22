@@ -1,7 +1,9 @@
 import Expo from 'expo';
 import React, {Component} from 'react';
+import { Provider } from 'mobx-react';
 
 import App from './src/app';
+import stores from './src/stores';
 
 class Tabi extends Component {
   constructor(props) {
@@ -25,7 +27,9 @@ class Tabi extends Component {
   render() {
     if(this.state.fontsLoaded)
       return (
-        <App />
+        <Provider {...stores}>
+          <App />
+        </Provider>
       );
     else
       return(

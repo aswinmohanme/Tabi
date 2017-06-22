@@ -2,6 +2,8 @@ import React from 'react';
 import Expo, {MapView, Permissions, Location} from 'expo';
 import {StyleSheet, View, KeyboardAvoidingView, Dimensions} from 'react-native';
 import {Icon, Text, Button} from 'react-native-elements';
+import { observable } from 'mobx';
+import { inject, observer} from 'mobx-react';
 
 import {header as Header} from '../components/header';
 import FullButton from '../components/fullButton';
@@ -9,17 +11,15 @@ import PlacesSearch from '../components/placesSearch';
 
 import {colors} from '../styles';
 
+@inject('locationStore')
+@observer
 class HomeScreen extends React.Component {
+  @observable curLocation = {};
+
   constructor(props) {
     super(props);
 
     this.state = {
-      location: {
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
-      },
       locPermission: null,
       gpsEnabled: null
     };
@@ -38,7 +38,7 @@ class HomeScreen extends React.Component {
       let location = await Location.getCurrentPositionAsync({});
 
       let region = this.regionFrom(location.coords.latitude, location.coords.longitude, 800);
-      this.setState({location: region, locPermission: true});
+      this.props.locationStore.curLocation = region;
       // } else {   alert("Enable Location if You are going Somewhere") }
     }
   }
@@ -63,9 +63,9 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <MapView style={styles.map} region={this.state.location}/>
-        <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
+        <MapView style={styles.map} region={this.props.locationStore.curLocation}/>
 
+        <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
 
         <View style={{
           width: '90%',
