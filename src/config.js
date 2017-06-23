@@ -1,6 +1,8 @@
 
 const DIRECTION_API =  'AIzaSyAW2DUyrUYFFtkARR6A092XWZnswcwkdh4'
+const PLACES_API = 'AIzaSyAwzVx7R_9By3LwMYSSMBrNdOySTQrpJZM';
 
 module.exports = {
   DIRECTION_API,
+  PLACES_API,
 }

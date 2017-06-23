@@ -2,7 +2,7 @@ import React from 'react';
 import {Dimensions} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {Icon} from 'react-native-elements';
-
+import {PLACES_API} from '../config';
 import {colors} from '../styles';
 
 export default PlacesSearch = ({onFetch}) => {
@@ -24,7 +24,7 @@ export default PlacesSearch = ({onFetch}) => {
         }}
         query={{
           // available options: https://developers.google.com/places/web-service/autocomplete
-          key: ' AIzaSyAwzVx7R_9By3LwMYSSMBrNdOySTQrpJZM ',
+          key: PLACES_API,
           language: 'en', // language of the results
         }}
         styles={{
