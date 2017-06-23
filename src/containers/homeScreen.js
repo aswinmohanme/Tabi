@@ -1,12 +1,13 @@
 import React from 'react';
 import Expo, {MapView, Permissions, Location} from 'expo';
-import {StyleSheet, View, KeyboardAvoidingView, Dimensions} from 'react-native';
+import {StyleSheet, View, Dimensions} from 'react-native';
 import {Icon, Text, Button} from 'react-native-elements';
 import { observable } from 'mobx';
 import { inject, observer} from 'mobx-react';
 
 import {header as Header} from '../components/header';
 import FullButton from '../components/fullButton';
+import RideCard from '../components/rideCard';
 import PlacesSearch from '../components/placesSearch';
 
 import {colors} from '../styles';
@@ -46,7 +47,7 @@ class HomeScreen extends React.Component {
 
   render() {
     const {locationStore} = this.props;
-
+    const {navigate} = this.props.navigation;
     if (locationStore.didLoad)
       return (
         <View style={styles.container}>
@@ -67,7 +68,7 @@ class HomeScreen extends React.Component {
             <PlacesSearch onFetch={(data) => {locationStore.destination = data}}/>
           </View>
           <View style={{flex: 1}}></View>
-          <FullButton title="Beam Me Up Scotty" icon="paper-plane" />
+          <FullButton onPressCall={() => navigate('BookTaxiScreen')} title="Beam Me Up Scotty" icon="paper-plane" />
         </View>
       );
 

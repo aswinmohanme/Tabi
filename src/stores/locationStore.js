@@ -8,7 +8,7 @@ export default class LocationStore {
   @observable curLocation = null
   @observable destination = null
   @observable distance = 600
-  @observable duration = 0
+  @observable time = 0
   @observable didLoad = false
 
   get didLoad() {
@@ -63,7 +63,7 @@ export default class LocationStore {
         let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc}&destination=${destinationLoc}&key=${DIRECTION_API}`)
         let respJson = await resp.json();
         this.distance = respJson.routes[0].legs[0].distance.value;
-        this.duration = respJson.routes[0].legs[0].duration.value;
+        this.time = respJson.routes[0].legs[0].duration.value;
         let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
         let coords = points.map((point, index) => {
           return {latitude: point[0], longitude: point[1]}
