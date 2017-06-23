@@ -46,8 +46,13 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <MapView style={styles.map} intialRegion={this.props.locationStore.curRegion} region={this.props.locationStore.destRegion}>
-          <MapView.Polyline coordinates={this.props.locationStore.wayPoints}/>
+
+          <MapView.Polyline coordinates={this.props.locationStore.wayPoints}
+            strokeWidth={2}
+            lineCap={'round'}
+          />
           </MapView>
+
         <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
 
         <View style={{
@@ -56,7 +61,6 @@ class HomeScreen extends React.Component {
         }}>
           <PlacesSearch onFetch={(data) => {this.props.locationStore.destination = data}}/>
         </View>
-
         <View style={{flex: 1}}></View>
         <FullButton title="Beam Me Up Scotty" icon="paper-plane" />
       </View>

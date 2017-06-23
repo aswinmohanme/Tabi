@@ -15,6 +15,8 @@ export default class LocationStore {
     lat: 3.4,
     lon: 5.6
   }
+  @observable distance = 600
+  @observable duration = 0
 
   get curLocation() {
     return this.curLocation;
@@ -33,11 +35,11 @@ export default class LocationStore {
   }
 
   @computed get curRegion() {
-    return this.regionFrom(this.curLocation.lat, this.curLocation.lon, 600)
+    return this.regionFrom(this.curLocation.lat, this.curLocation.lon, this.distance)
   }
 
   @computed get destRegion() {
-    return this.regionFrom(this.destination.lat, this.destination.lon, 600)
+    return this.regionFrom(this.destination.lat, this.destination.lon, this.distance)
   }
 
   @computed get wayPoints() {
@@ -52,6 +54,8 @@ export default class LocationStore {
       try {
         let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc}&destination=${destinationLoc}&key=${DIRECTION_API}`)
         let respJson = await resp.json();
+        this.distance = respJson.routes[0].legs[0].distance.value;
+        this.duration = respJson.routes[0].legs[0].duration.value;
         let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
         let coords = points.map((point, index) => {
           return {latitude: point[0], longitude: point[1]}
