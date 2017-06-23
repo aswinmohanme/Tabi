@@ -5,19 +5,19 @@ import {computedAsync} from 'computed-async-mobx';
 import {DIRECTION_API} from '../config';
 
 export default class LocationStore {
-  @observable curLocation = {
-    name: '',
-    lat: 9.7,
-    lon: 9.8
-  }
-  @observable destination = {
-    name: '',
-    lat: 3.4,
-    lon: 5.6
-  }
+  @observable curLocation = null
+  @observable destination = null
   @observable distance = 600
   @observable duration = 0
+  @observable didLoad = false
 
+  get didLoad() {
+    return this.didLoad;
+  }
+
+  set didLoad(value) {
+    this.didLoad = value;
+  }
   get curLocation() {
     return this.curLocation;
   }
@@ -34,12 +34,20 @@ export default class LocationStore {
     this.destination = location;
   }
 
+  @computed get region() {
+    if (this.destination === null) 
+      return this.curRegion;
+    
+    return this.regionFrom(this.destination.lat, this.destination.lon, this.distance)
+
+  }
+
   @computed get curRegion() {
-    return this.regionFrom(this.curLocation.lat, this.curLocation.lon, this.distance)
+    return this.regionFrom(this.curLocation.lat, this.curLocation.lon, 600)
   }
 
   @computed get destRegion() {
-    return this.regionFrom(this.destination.lat, this.destination.lon, this.distance)
+    return this.regionFrom(this.destination.lat, this.destination.lon, 600)
   }
 
   @computed get wayPoints() {

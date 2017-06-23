@@ -39,32 +39,39 @@ class HomeScreen extends React.Component {
         lat: coords.latitude,
         lon: coords.longitude,
       }
+
+      this.props.locationStore.didLoad = true;
     }
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <MapView style={styles.map} intialRegion={this.props.locationStore.curRegion} region={this.props.locationStore.destRegion}>
+    const {locationStore} = this.props;
 
-          <MapView.Polyline coordinates={this.props.locationStore.wayPoints}
-            strokeWidth={2}
-            lineCap={'round'}
-          />
-          </MapView>
+    if (locationStore.didLoad)
+      return (
+        <View style={styles.container}>
+          <MapView style={styles.map} region={locationStore.region}>
 
-        <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
+            <MapView.Polyline coordinates={locationStore.wayPoints}
+              strokeWidth={4}
+              lineCap='round'
+            />
+            </MapView>
 
-        <View style={{
-          width: '90%',
-          marginTop: 100
-        }}>
-          <PlacesSearch onFetch={(data) => {this.props.locationStore.destination = data}}/>
+          <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
+
+          <View style={{
+            width: '90%',
+            marginTop: 100
+          }}>
+            <PlacesSearch onFetch={(data) => {locationStore.destination = data}}/>
+          </View>
+          <View style={{flex: 1}}></View>
+          <FullButton title="Beam Me Up Scotty" icon="paper-plane" />
         </View>
-        <View style={{flex: 1}}></View>
-        <FullButton title="Beam Me Up Scotty" icon="paper-plane" />
-      </View>
-    );
+      );
+
+    return <Text>Loading</Text>;
   }
 }
 
