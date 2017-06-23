@@ -17,7 +17,7 @@ export default PlacesSearch = ({onFetch}) => {
         renderDescription={(row) => row.description} 
         onPress={(data, details = null) => { 
           let { geometry } = details;
-          onFetch({lat: geometry.location.lat, lon: geometry.location.lng});
+          onFetch({name: details.address_components.formatted_address, lat: geometry.location.lat, lon: geometry.location.lng});
         }}
         getDefaultValue={() => {
           return '';

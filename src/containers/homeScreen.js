@@ -33,7 +33,7 @@ class HomeScreen extends React.Component {
     if (status == 'granted') {
       // let { locationServicesEnabled } = await
       // Expo.Location.getProviderStatusAsync(); if (locationServicesEnabled){
-      let {coords} = await Location.getCurrentPositionAsync({});
+      let {coords} = await Location.getCurrentPositionAsync({enableHighAccuracy: true});
 
       this.props.locationStore.curLocation = {
         lat: coords.latitude,
@@ -46,9 +46,8 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <MapView style={styles.map} intialRegion={this.props.locationStore.curRegion} region={this.props.locationStore.destRegion}>
-          {/*<MapView.Polyline coordinates={this.props.locationStore.wayPoints}/>*/}
+          <MapView.Polyline coordinates={this.props.locationStore.wayPoints}/>
           </MapView>
-
         <Header icon='ios-menu' iconType='ionicon' title={'Book Ride'}/>
 
         <View style={{

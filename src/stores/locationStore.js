@@ -1,12 +1,20 @@
 import {observable, computed} from 'mobx';
 import Expo, {Permissions} from 'expo';
 import Polyline from '@mapbox/polyline';
-
+import {computedAsync} from 'computed-async-mobx';
 import {DIRECTION_API} from '../config';
 
 export default class LocationStore {
-  @observable curLocation = {}
-  @observable destination = {}
+  @observable curLocation = {
+    name: '',
+    lat: 9.7,
+    lon: 9.8
+  }
+  @observable destination = {
+    name: '',
+    lat: 3.4,
+    lon: 5.6
+  }
 
   get curLocation() {
     return this.curLocation;
@@ -33,7 +41,12 @@ export default class LocationStore {
   }
 
   @computed get wayPoints() {
-    return (async () => {
+    return this.wayCoords.value;
+  }
+
+  wayCoords = computedAsync({
+    init: [],
+    fetch: async() => {
       startLoc = `${this.curLocation.lat},${this.curLocation.lon}`
       destinationLoc = `${this.destination.lat},${this.destination.lon}`
       try {
@@ -43,13 +56,12 @@ export default class LocationStore {
         let coords = points.map((point, index) => {
           return {latitude: point[0], longitude: point[1]}
         })
-        alert(JSON.stringify(coord));
         return coords;
       } catch (error) {
-        alert(error);
+        console.log(error);
       }
-    })();
-  }
+    }
+  });
 
   regionFrom(lat, lon, distance) {
     distance = distance / 2

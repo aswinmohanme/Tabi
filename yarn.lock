@@ -1250,6 +1250,12 @@ compression@~1.5.2:
     on-headers "~1.0.0"
     vary "~1.0.1"
 
+computed-async-mobx@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/computed-async-mobx/-/computed-async-mobx-1.2.0.tgz#f1d247870824d9b7c5a420b2477dc0ffada22587"
+  dependencies:
+    mobx "^3.0.0"
+
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
@@ -2560,7 +2566,7 @@ mobx-react@^4.2.1:
   dependencies:
     hoist-non-react-statics "^1.2.0"
 
-mobx@^3.1.16:
+mobx@^3.0.0, mobx@^3.1.16:
   version "3.1.16"
   resolved "https://registry.yarnpkg.com/mobx/-/mobx-3.1.16.tgz#7ef06b6de7cba31d2ca872484d47ee36265d7768"
 
