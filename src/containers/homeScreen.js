@@ -19,10 +19,6 @@ class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      coords: []
-    };
-
     this.render = this
       .render
       .bind(this);
