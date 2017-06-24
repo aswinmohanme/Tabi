@@ -33,8 +33,8 @@ class BookTaxiScreen extends Component {
         <View style={{flex: 1}}></View>
 
         <View style={styles.bottomContainer}>
-          <Text>Distance {locationStore.distance}</Text>
-          <Text>Time {locationStore.time}</Text>
+          <Text style={styles.bottomText}>Distance {locationStore.distance}</Text>
+          <Text style={styles.bottomText}>Time {locationStore.time}</Text>
         </View>
         <FullButton title="Call Taxi" icon="taxi" iconType="material-community"/>
       </View>
@@ -60,8 +60,11 @@ const styles = StyleSheet.create({
     width:'90%'
   },
   bottomContainer: {
-
+    flexDirection: 'row',
   },
+  bottomText: {
+    fontFamily: 'karla'
+  }
 });
 
 export default BookTaxiScreen;
