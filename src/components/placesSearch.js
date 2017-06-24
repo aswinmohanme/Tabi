@@ -17,7 +17,6 @@ export default PlacesSearch = ({onFetch}) => {
         renderDescription={(row) => row.description} 
         onPress={(data, details = null) => { 
           let { geometry } = details;
-          console.log(details);
           onFetch({name: details.address_components[0].short_name, lat: geometry.location.lat, lon: geometry.location.lng});
         }}
         getDefaultValue={() => {
@@ -56,6 +55,7 @@ export default PlacesSearch = ({onFetch}) => {
             padding: 16,
             alignItems: 'center',
             justifyContent: 'center',
+            elevation: 8,
           }
         }}
         nearbyPlacesAPI='GooglePlacesSearch' 
