@@ -93,4 +93,4 @@ class LocationStore {
   }
 }
 
-export default new LocationStore();
+export default LocationStore;
