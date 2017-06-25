@@ -4,7 +4,7 @@ import Polyline from '@mapbox/polyline';
 import {computedAsync} from 'computed-async-mobx';
 import {DIRECTION_API} from '../config';
 
-export default class LocationStore {
+class LocationStore {
   @observable curLocation = null
   @observable destination = null
   @observable distance = 600
@@ -92,3 +92,5 @@ export default class LocationStore {
     }
   }
 }
+
+export default new LocationStore();
