@@ -24,9 +24,8 @@ class DriverStore {
 
     GeoQuery.on("key_entered", (key, location, distance) => {
       index = this.lookup(key)
-      if(index === -1)
-        console.log(key + index)
-        // return;
+      if(index != -1)
+        return;
 
       // console.log(key);
       this.drivers.push({
@@ -36,15 +35,9 @@ class DriverStore {
       });
     });
 
-    GeoQuery.on("ready", () => {
-      GeoQuery.cancel();
-    });
   }
 
   lookup( key ) {
-    if (this.drivers.length === 0)
-      return 0;
-
     for(var i=0; i < this.drivers.length; ++i){
       if( this.drivers[i].key === key)
         return i;
