@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-elements';
 
 import {observable} from 'mobx';
-import {observer, inject} from 'mobx-react';
+import {observer, inject} from 'mobx-react/native';
 import {locationStore} from '../stores';
 
 import {header as Header} from '../components/header';
@@ -36,7 +36,7 @@ class BookTaxiScreen extends Component {
           <Text style={styles.bottomText}>Distance {locationStore.distance}</Text>
           <Text style={styles.bottomText}>Time {locationStore.time}</Text>
         </View>
-        <FullButton title="Call Taxi" icon="taxi" iconType="material-community"/>
+        <FullButton title="Call Taxi" icon="taxi" iconType="material-community" onPressCall={() => navigate('DriverSelectScreen')}/>
       </View>
     );
   }
