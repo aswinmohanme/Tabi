@@ -22,14 +22,18 @@ class DriverSelectScreen extends Component {
   }
 
   render() {
+    const {driverDetails}  = this.props.driverStore;
+    console.log('Hey');
     return (
-      <View>
+      <List containerStyle={{marginTop: Expo.Constants.statusBarHeight}}>
         {
-          Object.keys(this.props.driverStore.driverDetails).map((key, index) =>
-            <Text>{JSON.stringify(this.props.driverStore.driverDetails[key])}</Text>
+          Object.keys(driverDetails).map((key, index) => 
+            <ListItem 
+              title={driverDetails[key].name || ""}
+            />
           )
         }
-      </View>
+      </List>
     );
   }
 }

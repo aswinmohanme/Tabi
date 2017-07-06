@@ -1,6 +1,12 @@
+import {
+  observable,
+  computed
+} from 'mobx';
 
-import { observable, computed } from 'mobx';
-import { computedAsync } from 'computed-async-mobx';
+import {
+  computedAsync
+} from 'computed-async-mobx';
+
 import FireBase from './fireBase';
 import GeoFire from 'geofire';
 
@@ -23,7 +29,7 @@ class DriverStore {
 
     GeoQuery.on("key_entered", (key, location, distance) => {
       index = this.lookup(key)
-      if(index != -1)
+      if (index != -1)
         return;
 
       // console.log(key);
@@ -35,31 +41,32 @@ class DriverStore {
     });
   }
 
- @computed get driverDetails() {
+  @computed get driverDetails() {
     return this.driverDetailsRaw.value;
- }
+  }
 
- driverDetailsRaw = computedAsync({
-    init: [{name: ''}],
+  driverDetailsRaw = computedAsync({
+    init: {
+    },
     fetch: async() => {
       let snapshots = await Promise.all(
-        this.drivers.map((d, i) => 
+        this.drivers.map((d, i) =>
           this.fireBaseRef.child('/drivers/').child(d.key).once('value')
         )
       );
 
-      let driversList = {};
+      let driversList = {}
       snapshots.forEach(snapshot => {
         driversList[snapshot.key] = snapshot.val();
       })
 
       return driversList;
     }
- });
+  });
 
-  lookup( key ) {
-    for(var i=0; i < this.drivers.length; ++i){
-      if( this.drivers[i].key === key)
+  lookup(key) {
+    for (var i = 0; i < this.drivers.length; ++i) {
+      if (this.drivers[i].key === key)
         return i;
     }
 
