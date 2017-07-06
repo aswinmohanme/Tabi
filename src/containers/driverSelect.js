@@ -13,10 +13,11 @@ class DriverSelectScreen extends Component {
     super(props);
     this.render = this.render.bind(this);
   }
+
   componentWillMount() {
     const {locationStore, driverStore} = this.props;
     const {lat, lon} = locationStore.curLocation;
-    console.log(lat, lon)
+
     driverStore.findDrivers([parseFloat(lat), parseFloat(lon)], 5000);
   }
 
@@ -24,9 +25,9 @@ class DriverSelectScreen extends Component {
     return (
       <View>
         {
-          this.props.driverStore.drivers.map((d, i) => (
-            <Text>{d.key}</Text>
-          ))
+          Object.keys(this.props.driverStore.driverDetails).map((key, index) =>
+            <Text>{JSON.stringify(this.props.driverStore.driverDetails[key])}</Text>
+          )
         }
       </View>
     );

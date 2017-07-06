@@ -11,8 +11,8 @@ class DriverStore {
   @observable radius = 0
 
   constructor() {
-    this.fireBaseRef = FireBase.database().ref().child('locs/');
-    this.geoFire = new GeoFire(this.fireBaseRef);
+    this.fireBaseRef = FireBase.database().ref();
+    this.geoFire = new GeoFire(this.fireBaseRef.child('locs/'));
   }
 
   findDrivers(location, radius) {
@@ -33,8 +33,29 @@ class DriverStore {
         distance: distance,
       });
     });
-
   }
+
+ @computed get driverDetails() {
+    return this.driverDetailsRaw.value;
+ }
+
+ driverDetailsRaw = computedAsync({
+    init: [{name: ''}],
+    fetch: async() => {
+      let snapshots = await Promise.all(
+        this.drivers.map((d, i) => 
+          this.fireBaseRef.child('/drivers/').child(d.key).once('value')
+        )
+      );
+
+      let driversList = {};
+      snapshots.forEach(snapshot => {
+        driversList[snapshot.key] = snapshot.val();
+      })
+
+      return driversList;
+    }
+ });
 
   lookup( key ) {
     for(var i=0; i < this.drivers.length; ++i){
