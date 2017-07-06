@@ -16,7 +16,6 @@ class DriverStore {
   }
 
   findDrivers(location, radius) {
-    console.log(location);
     var GeoQuery = this.geoFire.query({
       center: location,
       radius: radius,
