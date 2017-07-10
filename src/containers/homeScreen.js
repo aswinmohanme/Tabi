@@ -2,13 +2,16 @@ import React from 'react';
 import Expo, {MapView, Permissions, Location} from 'expo';
 import {StyleSheet, View, Dimensions} from 'react-native';
 import {Icon, Text, Button} from 'react-native-elements';
-import { observable } from 'mobx';
+import { observable, reaction, autorun } from 'mobx';
 import { inject, observer} from 'mobx-react';
 
 import {header as Header} from '../components/header';
 import FullButton from '../components/fullButton';
 import RideCard from '../components/rideCard';
 import PlacesSearch from '../components/placesSearch';
+
+import Firebase from '../stores/fireBase';
+import GeoFire from 'geofire';
 
 import {colors} from '../styles';
 
@@ -22,6 +25,27 @@ class HomeScreen extends React.Component {
     this.render = this
       .render
       .bind(this);
+    
+    this.firebase = Firebase.database().ref();
+    this.geoFire = new GeoFire(this.firebase.child('locs/').child('users/'));
+
+    this.firebaseCurLocation = reaction(
+      () => this.props.locationStore.curLocation,
+      () => {
+        this.firebase.child('users/' + 1).update({
+          curLocation: this.props.locationStore.curLocation,
+        });
+      }
+    );
+
+    this.firebaseDestination = reaction(
+      () => this.props.locationStore.destination,
+      () => {
+        this.firebase.child('users/' + 1).update({
+          destination: this.props.locationStore.destination,
+        });
+      }
+    );
   }
 
   async componentWillMount() {
