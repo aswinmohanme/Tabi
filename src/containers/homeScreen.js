@@ -35,6 +35,7 @@ class HomeScreen extends React.Component {
         this.firebase.child('users/' + 1).update({
           curLocation: this.props.locationStore.curLocation,
         });
+        this.geoFire.set("1", [this.props.locationStore.curLocation.lat, this.props.locationStore.curLocation.lon]);
       }
     );
 
