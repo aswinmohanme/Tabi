@@ -3,7 +3,7 @@ const colors = {
   bgColor: '#ecf0f1',
   headColor: 'rgba(236, 240, 241,1.0)',
 
-  btnPrimColor: '#36D6E7',
+  btnPrimColor: '#3498db',
   btnErr: '#EA5455',
 
   txtColor: '#2c3e50',

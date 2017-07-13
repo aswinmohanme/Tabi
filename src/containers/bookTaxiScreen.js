@@ -23,6 +23,22 @@ class BookTaxiScreen extends Component {
               strokeWidth={4}
               lineCap='round'
             />
+            <MapView.Marker
+              coordinate={{
+              latitude: locationStore.curLocation.lat,
+              longitude: locationStore.curLocation.lon
+            }}
+              />
+              {
+                (locationStore.destination === null)? 
+                null:
+                <MapView.Marker
+                  coordinate={{
+                  latitude: locationStore.destination.lat,
+                  longitude: locationStore.destination.lon
+                }}
+                  />
+              }
         </MapView>
         <Header onIconPress={() => goBack()} icon="backburger" title="Book Ride" iconType="material-community"/>
 

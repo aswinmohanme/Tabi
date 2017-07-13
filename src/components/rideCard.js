@@ -2,6 +2,7 @@ import React from 'react';
 
 import {View} from 'react-native';
 import {Button, Text, Icon} from 'react-native-elements';
+import {colors} from '../styles';
 
 export default RideCard = ({destination}) => {
   return(
@@ -10,16 +11,16 @@ export default RideCard = ({destination}) => {
             <View style={{flexDirection: 'row', padding:10}}>
               <Icon name="circle" size={12} type="font-awesome"/>
               <View style={{marginLeft: 20}}>
-                <Text style={{fontSize: 14, fontFamily: 'karla-bold'}}>PickUp Location</Text>
-                <Text style={{fontSize: 16, marginTop: 2, fontFamily: 'karla-bold'}}>Your Location</Text>
+                <Text style={{fontSize: 14, fontFamily: 'karla-bold', color: colors.txtColorLight}}>PickUp Location</Text>
+                <Text style={{fontSize: 16, marginTop: 2, fontFamily: 'karla-bold', color: colors.txtColor}}>Your Location</Text>
               </View>
             </View>
 
             <View style={{flexDirection: 'row', padding:10}}>
               <Icon name="circle" size={12} type="font-awesome"/>
               <View style={{marginLeft: 20}}>
-                <Text style={{fontSize: 14, marginTop: 6,fontFamily: 'karla-bold'}}>Destination</Text>
-                <Text style={{fontSize: 16, marginTop: 2, fontFamily: 'karla-bold'}}>{destination}</Text>
+                <Text style={{fontSize: 14, marginTop: 6,fontFamily: 'karla-bold', color: colors.txtColorLight}}>Destination</Text>
+                <Text style={{fontSize: 16, marginTop: 2, fontFamily: 'karla-bold', color: colors.txtColor}}>{destination}</Text>
               </View>
             </View>
           </View>
