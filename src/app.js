@@ -10,9 +10,9 @@ import DriverDetailsScreen from './containers/driverDetails';
 
 
 const App = StackNavigator({
-  HomeScreen: {screen: HomeScreen},
-  BookTaxiScreen: {screen: BookTaxiScreen},
-  DriverSelectScreen: {screen: DriverSelectScreen},
+  // HomeScreen: {screen: HomeScreen},
+  // BookTaxiScreen: {screen: BookTaxiScreen},
+  // DriverSelectScreen: {screen: DriverSelectScreen},
   DriverDetailsScreen: {screen: DriverDetailsScreen},
 },{
   navigationOptions: {
