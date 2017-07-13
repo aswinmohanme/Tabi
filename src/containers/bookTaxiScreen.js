@@ -49,8 +49,8 @@ class BookTaxiScreen extends Component {
         <View style={{flex: 1}}></View>
 
         <View style={styles.bottomContainer}>
-          <Text style={styles.bottomText}>Distance {locationStore.distance}</Text>
-          <Text style={styles.bottomText}>Time {locationStore.time}</Text>
+          <Text style={styles.bottomText}>Distance {locationStore.distance / 1000} KM</Text>
+          <Text style={styles.bottomText}>Time {locationStore.time / 60}</Text>
         </View>
         <FullButton title="Call Taxi" icon="taxi" iconType="material-community" onPressCall={() => navigate('DriverSelectScreen')}/>
       </View>
@@ -77,9 +77,11 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   bottomText: {
-    fontFamily: 'karla'
+    fontFamily: 'karla',
+    fontSize: 18
   }
 });
 
