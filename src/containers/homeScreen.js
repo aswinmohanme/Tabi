@@ -1,5 +1,5 @@
 import React from 'react';
-import Expo, {MapView, Permissions, Location} from 'expo';
+import Expo, {MapView, Permissions, Location, LinearGradient} from 'expo';
 import {StyleSheet, View, Dimensions} from 'react-native';
 import {Icon, Text, Button} from 'react-native-elements';
 import { observable, reaction, autorun } from 'mobx';
@@ -93,7 +93,14 @@ class HomeScreen extends React.Component {
         </View>
       );
 
-    return <Text>Loading</Text>;
+    return(
+      <View style={{flex:1, alignItems: 'center', justifyContent: 'center', padding: 40, backgroundColor: colors.bgColor}}>
+          <Text style={{fontFamily: 'karla', fontSize: 18, color: colors.txtColor}}>You shoudn't be able to read this. </Text>
+          <Text style={{fontFamily: 'karla', fontSize: 18, color: colors.txtColorLight}}>If you can Turn on the Location Access</Text>
+          <Button fontFamily="karla-bold" fontSize={16} backgroundColor={colors.btnErr}
+            containerViewStyle={{width: '100%', marginTop: 24, elevation: 5}} buttonStyle={{borderRadius: 5}} title="Enable Location"/>
+      </View>
+    );
   }
 }
 
