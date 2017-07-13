@@ -23,13 +23,21 @@ class DriverDetailsScreen extends Component {
 
   async componentWillMount(){
     // this.fireBase = await Firebase.database().ref().child('drivers/' + this.props.navigation.state.params.id);
-    this.fireBase = await FireBase.database().ref().child('drivers/' + '1');
-    snapshot = await this.fireBase.once('value');
+    fireBase =  FireBase.database().ref().child('drivers/' + '1');
+    snapshot =  await fireBase.once('value');
 
     details = snapshot.val();
     this.setState({
       driver: details,
       didLoad: true,
+    });
+  }
+
+  async _handlePress() {
+    fireBase =  FireBase.database().ref().child('drivers/' + '1' + '/ride');
+    await fireBase.update({
+        rideId: 1,
+        requestedUser: 1,
     });
   }
 
@@ -51,7 +59,7 @@ class DriverDetailsScreen extends Component {
             <Text>$ 48</Text>
           </View>
           <View style={{flex: 1}}></View>
-          <FullButton onPressCall={() => navigate('BookTaxiScreen')} title="Come Pick Me Up" icon="paper-plane" />
+          <FullButton onPressCall={this._handlePress.bind(this)} title="Come Pick Me Up" icon="paper-plane" />
         </View>
         </View>
       );
@@ -69,6 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     elevation: 50,
     backgroundColor: 'white',
+    borderRadius: 5,
   },
   name: {
     margin: 10,
