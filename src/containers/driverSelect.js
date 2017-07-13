@@ -23,6 +23,7 @@ class DriverSelectScreen extends Component {
 
   render() {
     const {driverDetails}  = this.props.driverStore;
+    const {navigate} = this.props.navigation;
     console.log('Hey');
     return (
       <List containerStyle={{marginTop: Expo.Constants.statusBarHeight}}>
@@ -30,6 +31,7 @@ class DriverSelectScreen extends Component {
           Object.keys(driverDetails).map((key, index) => 
             <ListItem 
               title={driverDetails[key].name || ""}
+              onPress={() => navigate('DriverDetailsScreen', {id: key})}
             />
           )
         }
