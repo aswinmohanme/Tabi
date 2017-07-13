@@ -18,7 +18,7 @@ class DriverStore {
 
   constructor() {
     this.fireBaseRef = FireBase.database().ref();
-    this.geoFire = new GeoFire(this.fireBaseRef.child('locs/'));
+    this.geoFire = new GeoFire(this.fireBaseRef.child('locs').child('drivers'));
   }
 
   findDrivers(location, radius) {
@@ -51,7 +51,7 @@ class DriverStore {
     fetch: async() => {
       let snapshots = await Promise.all(
         this.drivers.map((d, i) =>
-          this.fireBaseRef.child('/drivers/').child(d.key).once('value')
+          this.fireBaseRef.child('drivers/').child(d.key).once('value')
         )
       );
 
