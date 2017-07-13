@@ -10,7 +10,7 @@ import {locationStore} from '../stores';
 import {header as Header} from '../components/header';
 import RideCard from '../components/rideCard';
 import FullButton from '../components/fullButton';
-
+import {colors} from '../styles';
 @inject(['locationStore'])@observer
 class BookTaxiScreen extends Component {
   render() {
@@ -43,15 +43,11 @@ class BookTaxiScreen extends Component {
         <Header onIconPress={() => goBack()} icon="backburger" title="Book Ride" iconType="material-community"/>
 
         <View style={styles.rideCard}>
-          <RideCard destination={locationStore.destination.name}/>
+          <RideCard destination={locationStore.destination.name} distance={locationStore.distance / 1000} time={parseInt(locationStore.time / 60)}/>
         </View>
 
         <View style={{flex: 1}}></View>
 
-        <View style={styles.bottomContainer}>
-          <Text style={styles.bottomText}>Distance {locationStore.distance / 1000} KM</Text>
-          <Text style={styles.bottomText}>Time {locationStore.time / 60}</Text>
-        </View>
         <FullButton title="Call Taxi" icon="taxi" iconType="material-community" onPressCall={() => navigate('DriverSelectScreen')}/>
       </View>
     );
@@ -77,11 +73,15 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    backgroundColor: colors.bgColor,
+    width: '100%',
+    padding: 20
   },
   bottomText: {
-    fontFamily: 'karla',
-    fontSize: 18
+    fontFamily: 'karla-bold',
+    fontSize: 16,
+    color: colors.txtColor
   }
 });
 
