@@ -101,7 +101,7 @@ class HomeScreen extends React.Component {
           <View
             style={{
             width: '90%',
-            marginTop: 100
+            marginTop: 80
           }}>
             <PlacesSearch
               onFetch={(data) => {
