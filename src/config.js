@@ -16,3 +16,4 @@ module.exports = {
   PLACES_API,
   FIREBASECONFIG,
 }
+
